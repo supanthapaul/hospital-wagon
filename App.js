@@ -8,7 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MapScreen from './screens/MapScreen';
-
+import LoginScreen from './screens/LoginScreen';
+import Sawo from "react-native-sawo";
 
 
 export default function App() {
@@ -25,10 +26,18 @@ export default function App() {
         >
           <Stack.Navigator>
             <Stack.Screen 
+              name="LoginScreen" 
+              component={LoginScreen} 
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen 
               name="HomeScreen" 
               component={HomeScreen} 
               options={{
-                title: "Hospital Wagon"
+                title: "Hospital Wagon",
+                headerBackVisible: false
               }}
             />
             <Stack.Screen 
@@ -38,6 +47,9 @@ export default function App() {
                 headerShown: false
               }}
             />
+            <Stack.Screen name="Login" component={Sawo} options={{
+                headerShown: false
+              }}/>
           </Stack.Navigator>
         </KeyboardAvoidingView>
         </SafeAreaProvider>

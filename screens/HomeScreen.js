@@ -79,7 +79,7 @@ export default HomeScreen = () => {
         <Text style={tw`pb-2 text-lg`}>Get an ambulance at your doorstep</Text>
         <GooglePlacesAutocomplete
           ref={inputRef}
-          placeholder='Where From?'
+          placeholder="Where's the emergency?"
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={400}
           fetchDetails={true}
