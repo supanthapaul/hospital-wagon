@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Text, StyleSheet, View, SafeAreaView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import tw from 'tailwind-react-native-classnames';
@@ -7,7 +7,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import {GOOGLE_API_KEY} from '@env';
 import * as Location from 'expo-location';
 import { useDispatch } from 'react-redux';
-import { setDestination, setOrigin } from '../slices/navSlice';
+import { setDestination, setOrigin, setTravelTimeInformation } from '../slices/navSlice';
 import { useSelector } from 'react-redux';
 import { selectOrigin } from '../slices/navSlice';
 
@@ -17,10 +17,25 @@ export default HomeScreen = () => {
   const origin = useSelector(selectOrigin)
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const inputRef = useRef();
 
   useEffect(() => {
     getLocation();
   }, []);
+  useEffect(() => {
+    
+  }, [navigation]);
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(setOrigin(null));
+      dispatch(setDestination(null));
+      dispatch(setTravelTimeInformation(null));
+      console.log("ON HOME")
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -61,7 +76,9 @@ export default HomeScreen = () => {
             uri: 'https://links.papareact.com/gzs'
           }}
         /> */}
+        <Text style={tw`pb-2 text-lg`}>Get an ambulance at your doorstep</Text>
         <GooglePlacesAutocomplete
+          ref={inputRef}
           placeholder='Where From?'
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={400}
@@ -72,6 +89,9 @@ export default HomeScreen = () => {
               flex: 0,
             },
             textInput: {
+              borderColor: "grey",
+              padding: 15,
+              borderWidth: 2,
               fontSize: 18,
             },
           }}
@@ -95,8 +115,14 @@ export default HomeScreen = () => {
         />
         <Button
           title="Get an Ambulance"
+          buttonStyle={{
+            backgroundColor: "red",
+            marginTop: 6
+          }}
+          raised
           disabled={!origin}
           onPress={() => {
+            inputRef.current?.clear();
             navigation.navigate("MapScreen")
           }}
         />
