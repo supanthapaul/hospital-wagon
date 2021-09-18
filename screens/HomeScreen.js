@@ -8,10 +8,13 @@ import {GOOGLE_API_KEY} from '@env';
 import * as Location from 'expo-location';
 import { useDispatch } from 'react-redux';
 import { setDestination, setOrigin } from '../slices/navSlice';
+import { useSelector } from 'react-redux';
+import { selectOrigin } from '../slices/navSlice';
 
 export default HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const origin = useSelector(selectOrigin)
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -92,7 +95,7 @@ export default HomeScreen = () => {
         />
         <Button
           title="Get an Ambulance"
-          
+          disabled={!origin}
           onPress={() => {
             navigation.navigate("MapScreen")
           }}
