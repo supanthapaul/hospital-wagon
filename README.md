@@ -1,7 +1,7 @@
 # hospital-wagon
 Android/iOS app that streamlines the process of calling for ambulances right at your doorstep. 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/33364898/133915803-c3cc221f-f032-4254-86d6-58620c119756.gif" alt="animated" />
+  <img src="https://user-images.githubusercontent.com/33364898/133915999-af2f6728-3069-49d8-b8a4-a11c7bebba83.gif" alt="animated" />
 </p>
 
 ## Setup
