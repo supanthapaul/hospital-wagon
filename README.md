@@ -1,5 +1,32 @@
 # hospital-wagon
 Android/iOS app that streamlines the process of calling for ambulances right at your doorstep. 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/33364898/133915803-c3cc221f-f032-4254-86d6-58620c119756.gif" alt="animated" />
+</p>
+
+## Setup
+To setup and run this project locally, 
+1. Install Expo globally using npm, 
+```
+npm install --global expo-cli
+```
+2. Create a .env file with the following keys,
+    * Google API key with Places API, Directions API, and Distance Matrix API enabled
+    * Sawo Labs API key
+    * Sawo labs API secret 
+
+```
+GOOGLE_API_KEY=<YOUR_KEY>
+SAWO_KEY=<YOUR_KEY>
+SAWO_SECRET=<YOUR_KEY>
+```
+3. Lastly, install the dependencies and run the app 
+```
+npm i
+npm start
+```
+You can learn more about installing and running an api with Expo [here.](https://docs.expo.dev/get-started/installation/)
+
 
 ## Inspiration
 Calling for an ambulance in an emergency situation has always been a tedious process. It used to be like this,
